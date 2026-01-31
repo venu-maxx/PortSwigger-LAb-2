@@ -77,7 +77,7 @@ Proof of Error (Injection Test)
 Figure 1: Database error after injecting single quote ('), confirming lack of input sanitization.
 
 Proof of Successful Exploitation
-![Successful Login as Administrator]
+![Successful Login as Administrator](https://github.com/venu-maxx/PortSwigger-LAb-2/blob/681c9fe27fcc5a2e2269e3d4a8f2aae20f3e8972/admin-login-success.jpg)
 Figure 2: Logged in as administrator after payload administrator'--, bypassing the password check.
 
 Expolitation Explanation:
