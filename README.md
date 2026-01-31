@@ -73,7 +73,7 @@ Set-Cookie: session=...; Secure; HttpOnly
 Content-Length: 0
 
 Proof of Error (Injection Test)
-![SQL Injection Error Triggered]
+![SQL Injection Error Triggered]( https://github.com/venu-maxx/PortSwigger-LAb-2/blob/66fa5be43611ded1185efdb1f22215249fd8af90/error-injection.jpg)
 Figure 1: Database error after injecting single quote ('), confirming lack of input sanitization.
 
 Proof of Successful Exploitation
