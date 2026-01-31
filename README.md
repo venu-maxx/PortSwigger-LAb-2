@@ -1,10 +1,16 @@
 # PortSwigger Web Security Academy Lab Report:
 SQL Injection Vulnerability Allowing Login Bypass
 
+
+
 **Report ID:** PS-LAB-002
+
 **Author:** Venu kumar(Venu)
+
 **Date:** January 30, 2026
+
 **Lab Version:** PortSwigger Web Security Academy – SQL Injection Lab (Apprentice Level)
+
 
 ## Executive Summary
 **Vulnerability Type:** SQL injection allowing login bypass
@@ -13,12 +19,14 @@ SQL Injection Vulnerability Allowing Login Bypass
 **Impact:** In a production environment, this could lead to unauthorized access to administrative functions, sensitive data exposure, privilege escalation, or full system compromise if admin privileges allow further attacks. Attackers could potentially steal user data, modify content, or perform other malicious actions.
 **Status:** Successfully exploited in a controlled lab environment only; no real-world systems were affected. This report is for educational purposes.
 
+
 ## Environment and Tools Used
 **Target:** Simulated website from PortSwigger Web Security Academy (lab URL: e.g., `https://*.web-security-academy.net`)
 **Browser:** Google Chrome (Version 120.0 or similar)
 **Tools:** Burp Suite – for request interception, modification, and analysis
 **Operating System:** Windows 11
 **Test Date and Time:** January 30, 2026, approximately 05:22 PM IST
+
 
 ## Methodology:
 The lab was conducted following ethical hacking best practices in a safe, simulated environment with no risk to production systems.
@@ -29,6 +37,7 @@ The lab was conducted following ethical hacking best practices in a safe, simula
 - `username='` → triggered a database error (indicating lack of sanitization).
 - `username=administrator'--` → bypassed authentication, logging in as admin (password field ignored).
 5. Analyzed captured requests and responses in Burp Suite's **Target** and **Proxy > HTTP history** tabs for confirmation.
+
   
 ## Detailed Findings:
 **Vulnerable Endpoint:** `POST /login`
@@ -80,28 +89,32 @@ Proof of Successful Exploitation
 ![Successful Login as Administrator](https://github.com/venu-maxx/PortSwigger-LAb-2/blob/681c9fe27fcc5a2e2269e3d4a8f2aae20f3e8972/admin-login-success.jpg)
 Figure 2: Logged in as administrator after payload administrator'--, bypassing the password check.
 
+
 Expolitation Explanation:
 The injected single quote (') closed the string literal in the SQL query for the username. Appending -- commented out the remainder of the query (e.g., AND password = '...'). This made the authentication check succeed for the administrator user without validating the password — a classic boolean-based SQL injection technique for login bypass.
 
+
 Risk Assessment:
-Likelihood of Exploitation: High (user-controlled parameter with no sanitization or parameterization).
-Potential Impact: High to Critical — unauthorized access to restricted areas; in real applications, could enable full account takeover, data theft, or privilege escalation.
-Affected Components: Backend database (likely MySQL or PostgreSQL based on common PortSwigger lab setups and error patterns).
+   1.Likelihood of Exploitation: High (user-controlled parameter with no sanitization or parameterization).
+   2.Potential Impact: High to Critical — unauthorized access to restricted areas; in real applications, could enable full account takeover, data theft, or       privilege escalation.
+   3.Affected Components: Backend database (likely MySQL or PostgreSQL based on common PortSwigger lab setups and error patterns).
+
 
 Recommendations for Remediation:
-Use prepared statements or parameterized queries (e.g., PDO in PHP, PreparedStatement in Java) to separate data from SQL code.
-Implement strict input validation and sanitization for all user-supplied parameters.
-Deploy a Web Application Firewall (WAF) to detect and block common SQL injection patterns.
-Perform regular code reviews, static analysis, and dynamic scanning (e.g., using OWASP ZAP, sqlmap, or Burp Scanner).
-Apply the principle of least privilege to database accounts used by the application.
+   1.Use prepared statements or parameterized queries (e.g., PDO in PHP, PreparedStatement in Java) to separate data from SQL code.
+   2.Implement strict input validation and sanitization for all user-supplied parameters.
+   3.Deploy a Web Application Firewall (WAF) to detect and block common SQL injection patterns.
+   4.Perform regular code reviews, static analysis, and dynamic scanning (e.g., using OWASP ZAP, sqlmap, or Burp Scanner).
+   5.Apply the principle of least privilege to database accounts used by the application.
 
 Conclusion and Lessons Learned:
 This lab successfully demonstrated the identification and manual exploitation of a SQL injection vulnerability in a login function using Burp Suite.
+
 Key Takeaways:
-Always test authentication parameters for input validation flaws.
-Understand how SQL query structure can be manipulated with simple payloads like '--.
-This exercise strengthened skills in reconnaissance, payload crafting, HTTP interception, and professional report writing for ethical hacking and penetration testing scenarios.
+   1.Always test authentication parameters for input validation flaws.
+   2.Understand how SQL query structure can be manipulated with simple payloads like '--.
+   3.This exercise strengthened skills in reconnaissance, payload crafting, HTTP interception, and professional report writing for ethical hacking and penetration testing scenarios.
 
 References:
-PortSwigger Web Security Academy: SQL Injection
-Lab specifically: SQL injection vulnerability allowing login bypass
+   1.PortSwigger Web Security Academy: SQL Injection
+   2.Lab specifically: SQL injection vulnerability allowing login bypass
