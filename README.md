@@ -2,7 +2,7 @@
 SQL Injection Vulnerability Allowing Login Bypass
 
 **Report ID:** PS-LAB-002
-**Author:** Abhiram (Abhi)
+**Author:** Venu kumar(Venu)
 **Date:** January 30, 2026
 **Lab Version:** PortSwigger Web Security Academy – SQL Injection Lab (Apprentice Level)
 
